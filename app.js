@@ -1,4 +1,5 @@
 const booksContainer = document.querySelector(".books-container");
+const addBookBtn = document.querySelector(".add-btn");
 
 let myLibrary = [
   {
@@ -46,13 +47,13 @@ function displayBooks() {
     const readBook = document.createElement("p");
     readBook.classList.add("has-read");
 
-    bookTitle.textContent = book.title;
+    bookTitle.textContent = `Title: ${book.title}`;
     bookCard.appendChild(bookTitle);
 
-    bookAuthor.textContent = book.author;
+    bookAuthor.textContent = `Author: ${book.author}`;
     bookCard.appendChild(bookAuthor);
 
-    bookPages.textContent = book.numOfPages;
+    bookPages.textContent = `Pages: ${book.numOfPages}`;
     bookCard.appendChild(bookPages);
 
     readBook.textContent = book.hasRead ? "Read" : "Not Read";
