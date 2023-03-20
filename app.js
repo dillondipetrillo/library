@@ -2,6 +2,11 @@ const booksContainer = document.querySelector(".books-container");
 const addBookBtn = document.querySelector(".add-book .add-btn");
 const modalBackground = document.querySelector(".form-modal");
 const modalOverlay = document.querySelector(".modal-overlay");
+const addBookForm = document.querySelector(".add-book-form");
+const formBookTitle = document.getElementById("title");
+const formBookAuthor = document.getElementById("author");
+const formBookPages = document.getElementById("pages");
+const formHasRead = document.getElementsByName("has-read");
 
 let myLibrary = [
   {
@@ -30,9 +35,47 @@ let myLibrary = [
   },
 ];
 
-function Book() {}
+function Book(title, author, numOfPages, hasRead) {
+  this.title = title;
+  this.author = author;
+  this.numOfPages = numOfPages;
+  this.hasRead = hasRead;
+}
 
-function addBookToLibrary() {}
+function addBookToLibrary(e) {
+  e.preventDefault();
+
+  let checkedRadio;
+  for (let i = 0; i < formHasRead.length; i++) {
+    if (formHasRead[i].checked) {
+      checkedRadio = formHasRead[i].value === "true" ? true : false;
+      break;
+    }
+  }
+
+  const newBook = new Book(
+    formBookTitle.value,
+    formBookAuthor.value,
+    +formBookPages.value,
+    checkedRadio
+  );
+
+  myLibrary.push(newBook);
+
+  booksContainer.innerHTML = "";
+  displayBooks();
+  hideModal();
+
+  formBookTitle.value = "";
+  formBookAuthor.value = "";
+  formBookPages.value = "";
+  for (let i = 0; i < formHasRead.length; i++) {
+    if (formHasRead[i].checked) {
+      formHasRead[i].checked = false;
+      break;
+    }
+  }
+}
 
 function displayBooks() {
   for (let book of myLibrary) {
@@ -82,3 +125,5 @@ function hideModal() {
 addBookBtn.addEventListener("click", showModal);
 
 modalOverlay.addEventListener("click", hideModal);
+
+addBookForm.addEventListener("submit", addBookToLibrary);
