@@ -9,7 +9,8 @@
     <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="form-modal-overlay">
+    <div class="form-modal">
+      <div class="modal-overlay"></div>
       <form action="#" method="POST" class="add-book-form">
         <h2 class="form-title">Add a Book</h2>
         <div class="form-row">
@@ -39,11 +40,15 @@
         </div>
       </form>
     </div>
-    <main>
-      <h1>Book Library</h1>
-      <div class="add-book">
-        <button class="add-btn">Add Book</button>
+    <header>
+      <div class="header-wrapper">
+        <h1>Book Library</h1>
+        <div class="add-book">
+          <button class="add-btn">Add Book</button>
+        </div>
       </div>
+    </header>
+    <main>
       <section class="books-container"></section>
     </main>
   </body>

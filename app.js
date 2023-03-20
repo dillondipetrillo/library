@@ -1,7 +1,7 @@
 const booksContainer = document.querySelector(".books-container");
-const addBookBtn = document.querySelector(".add-btn");
-const formModalOverlay = document.querySelector(".form-modal-overlay");
-const addBookForm = document.querySelector(".add-book-form");
+const addBookBtn = document.querySelector(".add-book .add-btn");
+const modalBackground = document.querySelector(".form-modal");
+const modalOverlay = document.querySelector(".modal-overlay");
 
 let myLibrary = [
   {
@@ -64,3 +64,21 @@ function displayBooks() {
 }
 
 displayBooks();
+
+function showModal() {
+  if (!modalBackground.classList.contains("form-modal-display")) {
+    modalBackground.classList.add("form-modal-display");
+    document.body.classList.add("no-scroll");
+  }
+}
+
+function hideModal() {
+  if (modalBackground.classList.contains("form-modal-display")) {
+    modalBackground.classList.remove("form-modal-display");
+    document.body.classList.remove("no-scroll");
+  }
+}
+
+addBookBtn.addEventListener("click", showModal);
+
+modalOverlay.addEventListener("click", hideModal);
