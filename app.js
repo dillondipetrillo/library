@@ -101,8 +101,8 @@ function displayBooks() {
 
     deleteBtn.addEventListener("click", removeBook);
     statusChange.addEventListener("click", editReadStatus);
-    btnsDiv.appendChild(deleteBtn);
     btnsDiv.appendChild(statusChange);
+    btnsDiv.appendChild(deleteBtn);
 
     bookTitle.textContent = `Title: ${myLibrary[i].title}`;
     bookCard.appendChild(bookTitle);
