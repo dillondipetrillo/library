@@ -8,32 +8,7 @@ const formBookAuthor = document.getElementById("author");
 const formBookPages = document.getElementById("pages");
 const formHasRead = document.getElementsByName("has-read");
 
-let myLibrary = [
-  {
-    title: "Book 1",
-    author: "Author 1",
-    numOfPages: 123,
-    hasRead: true,
-  },
-  {
-    title: "Book 2",
-    author: "Author 2",
-    numOfPages: 432,
-    hasRead: false,
-  },
-  {
-    title: "Book 3",
-    author: "Author 3",
-    numOfPages: 1000,
-    hasRead: false,
-  },
-  {
-    title: "Book 4",
-    author: "Author 4",
-    numOfPages: 96,
-    hasRead: true,
-  },
-];
+let myLibrary = [];
 
 function Book(title, author, numOfPages, hasRead) {
   this.title = title;
@@ -62,7 +37,6 @@ function addBookToLibrary(e) {
 
   myLibrary.push(newBook);
 
-  booksContainer.innerHTML = "";
   displayBooks();
   hideModal();
 
@@ -77,10 +51,18 @@ function addBookToLibrary(e) {
   }
 }
 
+function removeBook(e) {
+  const bookToDelete = e.target.parentNode.parentNode.dataset.index;
+  myLibrary.splice(bookToDelete, 1);
+  displayBooks();
+}
+
 function displayBooks() {
-  for (let book of myLibrary) {
+  booksContainer.innerHTML = "";
+  for (let i = 0; i < myLibrary.length; i++) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
+    bookCard.setAttribute("data-index", i);
     booksContainer.appendChild(bookCard);
 
     const bookTitle = document.createElement("p");
@@ -91,18 +73,28 @@ function displayBooks() {
     bookPages.classList.add("book-pages");
     const readBook = document.createElement("p");
     readBook.classList.add("has-read");
+    const btnsDiv = document.createElement("div");
+    btnsDiv.classList.add("btns");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn", "add-btn");
+    deleteBtn.textContent = "Remove";
 
-    bookTitle.textContent = `Title: ${book.title}`;
+    deleteBtn.addEventListener("click", removeBook);
+    btnsDiv.appendChild(deleteBtn);
+
+    bookTitle.textContent = `Title: ${myLibrary[i].title}`;
     bookCard.appendChild(bookTitle);
 
-    bookAuthor.textContent = `Author: ${book.author}`;
+    bookAuthor.textContent = `Author: ${myLibrary[i].author}`;
     bookCard.appendChild(bookAuthor);
 
-    bookPages.textContent = `Pages: ${book.numOfPages}`;
+    bookPages.textContent = `Pages: ${myLibrary[i].numOfPages}`;
     bookCard.appendChild(bookPages);
 
-    readBook.textContent = book.hasRead ? "Read" : "Not Read";
+    readBook.textContent = myLibrary[i].hasRead ? "Read" : "Not Read";
     bookCard.appendChild(readBook);
+
+    bookCard.appendChild(btnsDiv);
   }
 }
 
@@ -123,7 +115,5 @@ function hideModal() {
 }
 
 addBookBtn.addEventListener("click", showModal);
-
 modalOverlay.addEventListener("click", hideModal);
-
 addBookForm.addEventListener("submit", addBookToLibrary);

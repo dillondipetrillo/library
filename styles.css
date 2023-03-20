@@ -178,6 +178,14 @@ h1 {
   border: 1px solid #eeeeee;
 }
 
-.book p:not(:last-child) {
+.book p {
   padding-bottom: 12px;
+}
+
+.delete-btn {
+  background-color: crimson;
+}
+
+.delete-btn:hover {
+  background-color: rgb(201, 21, 57);
 }
