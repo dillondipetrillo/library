@@ -7,6 +7,7 @@ const formBookTitle = document.getElementById("title");
 const formBookAuthor = document.getElementById("author");
 const formBookPages = document.getElementById("pages");
 const formHasRead = document.getElementsByName("has-read");
+const noBooksToShow = document.querySelector(".no-books");
 
 let myLibrary = [];
 
@@ -57,7 +58,22 @@ function removeBook(e) {
   displayBooks();
 }
 
+function editReadStatus(e) {
+  const bookToEdit = +e.target.parentNode.parentNode.dataset.index;
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (bookToEdit === i) {
+      myLibrary[bookToEdit].hasRead = !myLibrary[bookToEdit].hasRead;
+    }
+  }
+  displayBooks();
+}
+
 function displayBooks() {
+  if (myLibrary.length > 0) {
+    noBooksToShow.style.display = "none";
+  } else {
+    noBooksToShow.style.display = "block";
+  }
   booksContainer.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
     const bookCard = document.createElement("div");
@@ -73,14 +89,20 @@ function displayBooks() {
     bookPages.classList.add("book-pages");
     const readBook = document.createElement("p");
     readBook.classList.add("has-read");
+
     const btnsDiv = document.createElement("div");
     btnsDiv.classList.add("btns");
     const deleteBtn = document.createElement("button");
+    const statusChange = document.createElement("button");
     deleteBtn.classList.add("delete-btn", "add-btn");
+    statusChange.classList.add("status-change", "add-btn");
     deleteBtn.textContent = "Remove";
+    statusChange.textContent = myLibrary[i].hasRead ? "Unread" : "Read it";
 
     deleteBtn.addEventListener("click", removeBook);
+    statusChange.addEventListener("click", editReadStatus);
     btnsDiv.appendChild(deleteBtn);
+    btnsDiv.appendChild(statusChange);
 
     bookTitle.textContent = `Title: ${myLibrary[i].title}`;
     bookCard.appendChild(bookTitle);
