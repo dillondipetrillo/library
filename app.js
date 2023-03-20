@@ -1,5 +1,7 @@
 const booksContainer = document.querySelector(".books-container");
 const addBookBtn = document.querySelector(".add-btn");
+const formModalOverlay = document.querySelector(".form-modal-overlay");
+const addBookForm = document.querySelector(".add-book-form");
 
 let myLibrary = [
   {

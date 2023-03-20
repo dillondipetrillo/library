@@ -13,7 +13,7 @@ body {
   box-sizing: inherit;
 }
 
-.form-modal {
+.form-modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -22,6 +22,7 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
   backdrop-filter: blur(10px);
+  display: none;
 }
 
 .add-book-form {
@@ -30,16 +31,59 @@ body {
   max-width: 400px;
   margin: 150px auto;
   padding: 30px;
+  font-size: 1rem;
 }
 
 .add-book-form fieldset {
   border: none;
+  padding: 5px 0;
+}
+
+fieldset input[type="radio"]:first-of-type + label {
+  margin-right: 10px;
 }
 
 .add-book-form fieldset legend {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+.form-title {
+  margin-bottom: 10px;
+}
+
+.form-row {
+  display: grid;
+}
+
+.form-row:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.form-row > label,
+.form-read {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #d0cfcf;
+  border-radius: 4px;
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="number"]:focus {
+  outline: none;
+  border: 1px solid #a2a2a2;
+  box-shadow: 2px 2px 8px #eaeaea;
+}
+
+.form-row:last-child {
+  padding-top: 10px;
 }
 
 main {
