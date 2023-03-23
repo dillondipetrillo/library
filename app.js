@@ -11,11 +11,13 @@ const noBooksToShow = document.querySelector(".no-books");
 
 let myLibrary = [];
 
-function Book(title, author, numOfPages, hasRead) {
-  this.title = title;
-  this.author = author;
-  this.numOfPages = numOfPages;
-  this.hasRead = hasRead;
+class Book {
+  constructor(title, author, numOfPages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.numOfPages = numOfPages;
+    this.hasRead = hasRead;
+  }
 }
 
 function addBookToLibrary(e) {
