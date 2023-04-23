@@ -9,8 +9,6 @@ const formBookPages = document.getElementById("pages");
 const formHasRead = document.getElementsByName("has-read");
 const noBooksToShow = document.querySelector(".no-books");
 
-let myLibrary = [];
-
 class Book {
   constructor(title, author, numOfPages, hasRead) {
     this.title = title;
@@ -19,6 +17,30 @@ class Book {
     this.hasRead = hasRead;
   }
 }
+
+class Library {
+  constructor() {
+    this.library = [];
+  }
+
+  // add book to library
+  addBookToLibrary(newBook) {
+    this.library.push(newBook);
+  }
+
+  // remove boo from library
+  removeBook() {}
+}
+
+const bookLibrary = new Library();
+let myLibrary = bookLibrary.library;
+const newBook1 = new Book("dillon", "dipetrillo", 45, true);
+const newBook2 = new Book("kylo", "ren", 2, false);
+
+bookLibrary.addBookToLibrary(newBook1);
+bookLibrary.addBookToLibrary(newBook2);
+
+console.log(bookLibrary.library);
 
 function addBookToLibrary(e) {
   e.preventDefault();
